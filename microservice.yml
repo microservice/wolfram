@@ -1,0 +1,9 @@
+entrypoint:
+  arguments:
+    endpoint:
+      type: string
+      required: true
+
+environment:
+  WOLFRAM_API_KEY:
+    type: string
