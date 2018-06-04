@@ -1,8 +1,10 @@
-entrypoint:
-  arguments:
-    endpoint:
-      type: string
-      required: true
+commands:
+  get:
+    help: "The get HTTP command to call on given endpoint"
+    arguments:
+      endpoint:
+        type: string
+        help: 'An endpoint from http://products.wolframalpha.com/api/ must be supplied. Only the endpoints with url api.wolframalpha.com are supported. You do not need to provide your API key via query param as it will be supplied via your environment variable'
 
 environment:
   WOLFRAM_API_KEY:

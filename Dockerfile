@@ -1,6 +1,6 @@
 FROM python:alpine
 
-ADD app.py /app.py
+ADD wolfram.py /wolfram.py
 RUN pip install requests
 
-ENTRYPOINT  ["python", "app.py"]
+ENTRYPOINT  ["python", "wolfram.py"]
