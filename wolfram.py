@@ -3,7 +3,7 @@ import argparse
 import requests
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--method', help='The http method')
+parser.add_argument('method', help='The http method')
 parser.add_argument('--endpoint', help='An endpoint from http://products.wolframalpha.com/api/ must be supplied.'
                                        'Only the endpoints with url api.wolframalpha.com are supported.'
                                        'You do not need to provide your API key via query param as it will be'

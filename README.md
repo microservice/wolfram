@@ -7,5 +7,5 @@ Data will be returned as a JSON, unless result is defined as an image or string 
 ## Usage
 
 ```coffee
-data = wolfram method:'get' endpoint:'/v2/query?input=solve+3x-7%3D11&podstate=Result__Step-by-step+solution'
+data = wolfram get endpoint:'/v2/query?input=solve+3x-7%3D11&podstate=Result__Step-by-step+solution'
 ```
