@@ -1,9 +1,12 @@
 commands:
   get:
+    output:
+      type: any
     help: "The get HTTP command to call on given endpoint"
     arguments:
       endpoint:
         type: string
+        required: true
         help: |
           An endpoint from http://products.wolframalpha.com/api/ must be supplied.
           Only the endpoints with url api.wolframalpha.com are supported.

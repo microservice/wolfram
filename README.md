@@ -7,5 +7,7 @@ Data will be returned as a JSON, unless result is defined as an image or string 
 ## Usage
 
 ```sh
-microservice.guide exec wolfram get endpoint:'/v2/query?input=solve+3x-7%3D11&podstate=Result__Step-by-step+solution'
+omg exec wolfram -c get -a endpoint='/v2/query?input=solve+3x-7%3D11&podstate=Result__Step-by-step+solution'
 ```
+
+The endpoint must be an endpoint of the `api.wolframalpha.com` domain. Ex: http://products.wolframalpha.com/show-steps-api/documentation/
