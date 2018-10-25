@@ -1,4 +1,5 @@
-commands:
+omg: 1
+actions:
   get:
     output:
       type: any
