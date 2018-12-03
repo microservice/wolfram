@@ -1,19 +1,30 @@
 omg: 1
+lifecycle:
+  startup:
+    command: ["python", "/app/app.py"]
 actions:
-  get:
-    output:
-      type: any
-    help: "The get HTTP command to call on given endpoint"
+  wolfram:
+    http:
+      path: /shortanswer
+      method: post
+      port: 8000
+      contentType: application/json
     arguments:
-      endpoint:
+      query:
         type: string
         required: true
-        help: |
-          An endpoint from http://products.wolframalpha.com/api/ must be supplied.
-          Only the endpoints with url api.wolframalpha.com are supported.
-          You do not need to provide your API key via query param as it will be
-          supplied via your environment variable
+        in: requestBody
+      units:
+        type: string
+        required: false
+        in: requestBody
+    output:
+      type: object
+      contentType: application/json
 
 environment:
-  WOLFRAM_API_KEY:
+  APP_ID:
     type: string
+    required: true
+    help: |
+      Please create an app id through https://products.wolframalpha.com/short-answers-api/documentation/
