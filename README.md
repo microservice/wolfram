@@ -1,4 +1,4 @@
-# Wolfram Alpha Short Answers as a microservice
+# Wolfram Short Answers as a microservice
 
 ## Usage
 

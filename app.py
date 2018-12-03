@@ -13,7 +13,7 @@ class Handler:
     def __init__(self) -> None:
     	self.app_id = os.getenv('APP_ID')
 
-    def makeShortAnswer(self):
+    def make_short_answer(self):
     	req = request.get_json()
     	query = req['query']
     	try:
@@ -38,5 +38,5 @@ if __name__ == '__main__':
         sys.exit(1)
 
     handler = Handler()
-    handler.app.add_url_rule('/shortanswer', 'shortanswer', handler.makeShortAnswer , methods=['post'])
+    handler.app.add_url_rule('/shortanswer', 'shortanswer', handler.make_short_answer , methods=['post'])
     handler.app.run(host='0.0.0.0', port=8000)
