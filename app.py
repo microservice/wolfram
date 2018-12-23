@@ -1,42 +1,51 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-import sys
 import requests
+import urllib.parse
 
 from flask import Flask, make_response, request
-
 
 class Handler:
     app = Flask(__name__)
 
     def __init__(self) -> None:
-    	self.app_id = os.getenv('APP_ID')
+        self.app_id = os.getenv('WOLFRAM_APP_ID')
+
 
     def make_short_answer(self):
-    	req = request.get_json()
-    	query = req['query']
-    	try:
-    		units = req['units']
-    	except Exception as e:
-    		units = ""
-    	
-    	url = "http://api.wolframalpha.com/v1/result?appid={0}&i={1}%3f&units={2}".format(self.app_id, query, units)
-    	response = requests.get(url)
+        req = request.get_json()
+        query = {'i': req['query']}
+        encoded_query = urllib.parse.urlencode(query)
+        try:
+            units = req['units']
+        except:
+            units = "metric"
 
-    	return self.end({'response': response.text})
+        url = f'http://api.wolframalpha.com/v1/result?appid={self.app_id}&{encoded_query}%3f&units={units}'
+        response = requests.get(url)
 
-    def end(self, res):
+        return self.end({'success': True, 'answer': response.text})
+
+
+    @staticmethod
+    def end(res):
         resp = make_response(json.dumps(res))
         resp.headers['Content-Type'] = 'application/json; charset=utf-8'
         return resp
 
 
+    @staticmethod
+    def app_error(e):
+        return json.dumps({'success': False, 'code': 400, 'error': str(e)}), 400
+
+
 if __name__ == '__main__':
-    if os.getenv('APP_ID') is None:
-        print('Environment variable APP_ID not found.')
-        sys.exit(1)
+    for env_var in ["WOLFRAM_APP_ID"]:
+        assert env_var in os.environ, \
+            f"The environment variable '{env_var}' must be set."
 
     handler = Handler()
-    handler.app.add_url_rule('/shortanswer', 'shortanswer', handler.make_short_answer , methods=['post'])
+    handler.app.register_error_handler(Exception, handler.app_error)
+    handler.app.add_url_rule('/shortanswer', 'shortanswer', handler.make_short_answer, methods=['post'])
     handler.app.run(host='0.0.0.0', port=8000)

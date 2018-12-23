@@ -3,7 +3,7 @@ lifecycle:
   startup:
     command: ["python", "/app/app.py"]
 actions:
-  wolfram:
+  answer:
     http:
       path: /shortanswer
       method: post
@@ -23,7 +23,7 @@ actions:
       contentType: application/json
 
 environment:
-  APP_ID:
+  WOLFRAM_APP_ID:
     type: string
     required: true
     help: |
