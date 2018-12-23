@@ -6,3 +6,4 @@ RUN         pip install -r /app/requirements.txt
 ADD         app.py /app
 
 ENTRYPOINT  ["python", "/app/app.py"]
+

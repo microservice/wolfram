@@ -49,3 +49,4 @@ if __name__ == '__main__':
     handler.app.register_error_handler(Exception, handler.app_error)
     handler.app.add_url_rule('/shortanswer', 'shortanswer', handler.make_short_answer, methods=['post'])
     handler.app.run(host='0.0.0.0', port=8000)
+
