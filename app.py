@@ -17,12 +17,9 @@ class Handler:
         req = request.get_json()
         query = {'i': req['query']}
         encoded_query = urllib.parse.urlencode(query)
-        try:
-            units = req['units']
-        except:
-            units = "metric"
+        units = req.get('units', 'metric')
 
-        url = f'http://api.wolframalpha.com/v1/result?appid={self.app_id}&{encoded_query}%3f&units={units}'
+        url = f'http://api.wolframalpha.com/v1/result?appid={self.app_id}&{encoded_query}&units={units}'
         response = requests.get(url)
 
         return self.end({'success': True, 'answer': response.text})
@@ -41,12 +38,11 @@ class Handler:
 
 
 if __name__ == '__main__':
-    for env_var in ["WOLFRAM_APP_ID"]:
+    for env_var in ['WOLFRAM_APP_ID']:
         assert env_var in os.environ, \
-            f"The environment variable '{env_var}' must be set."
+            f'The environment variable "{env_var}" must be set.'
 
     handler = Handler()
     handler.app.register_error_handler(Exception, handler.app_error)
     handler.app.add_url_rule('/shortanswer', 'shortanswer', handler.make_short_answer, methods=['post'])
     handler.app.run(host='0.0.0.0', port=8000)
-
