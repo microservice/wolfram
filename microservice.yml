@@ -15,16 +15,22 @@ actions:
         required: true
         in: requestBody
       units:
-        type: string
+        type: enum
+        enum:
+          - metric
+          - imperial
         required: false
         in: requestBody
     output:
       type: object
       contentType: application/json
+      properties:
+        answer:
+          type: string
+          help: The response from the Wolfram API
 
 environment:
   WOLFRAM_APP_ID:
     type: string
     required: true
-    help: |
-      Please create an app id through https://products.wolframalpha.com/short-answers-api/documentation/
+    help: Please create an app ID from https://products.wolframalpha.com/short-answers-api/documentation/
