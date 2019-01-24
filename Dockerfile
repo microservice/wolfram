@@ -1,6 +1,9 @@
-FROM python:alpine
+FROM        python:3.7-alpine
 
-ADD wolfram.py /wolfram.py
-RUN pip install requests
+RUN         mkdir /app
+ADD         requirements.txt /app
+RUN         pip install -r /app/requirements.txt
+ADD         app.py /app
 
-ENTRYPOINT  ["python", "wolfram.py"]
+ENTRYPOINT  ["python", "/app/app.py"]
+
