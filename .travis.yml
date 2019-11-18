@@ -1,18 +1,18 @@
 language: node_js
 node_js:
-- '12'
+  - '12'
 services:
-- docker
+  - docker
 before_install:
-- npm i @microservices/cli
+  - npm i @microservices/cli
 script:
-- npx oms build
-- |
-  output="$(npx oms run --silent answer \
-  -a query='How far is Los Angeles from New York?' \
-  -a units='metric' \
-  -e WOLFRAM_APP_ID=$WOLFRAM_APP_ID | jq -c .)"
-  if [ "$output" != '{"success":true,"answer":"about 3966 kilometers"' ] ; then echo "$output"; exit 1; fi
+  - npx oms build
+  - |
+    output="$(npx oms run --silent answer \
+    -a query='How far is Los Angeles from New York?' \
+    -a units='metric' \
+    -e WOLFRAM_APP_ID=$WOLFRAM_APP_ID | jq -c .)"
+    if [ "$output" != '{"success":true,"answer":"about 3966 kilometers"}' ] ; then echo "$output"; exit 1; fi
 env:
   global:
     secure: DimJWzsASa0OPhzW0YxLwcMSds84OSSNGGOyXtAZx5V9BBKzMbC9xeAQAp3HOJ+mJiEh7RdGFLtJqhk7+lnsvynHz0Rv1btdowW3tjC3NcOA8ImE/5N5aQMT6bbeS1kR/oQo1QVzxG4dkJe1n6ZTwqfjRP4Ouq+ejrtdrDETbxQbyO5b9z4tzYad1O23ZB1el1O4e+upIwUiAMud5L6UpYutYG+OygA9RGnffAeZoqMp1nqn0psEbFds36OdY3k8ZyRLCGTljkrq8dOj6KlgtT3h44z5cJEDHFMxo9kqALO9qxYfscxq+VD4Bi4Qk9tk2UpUUbHVoE8W9jGYrt8NSFWqXHBaU48Wzb6KMcDjasrAFrGMaNugQlvoapWI+A1HE/k1Io21bWY2ZbbwEU6yzbp+UrNUqp8iOCeY0FrmBgYS0s9wbtK0rAvoVll515nPKTmAjqNg7uz0bqWio8PLwS5qE1hIpu3MZ5G48EdU4R0QMWjrv7t/wGfmKuE6Q2hzvQXaIRAp47prOhrnqf2k69eBHXfiwId/jtUiClJwcTcYGqdADjWvYsqluEAUOQBRsJVtoCTPS14T0ye6iLd8Eoo3cdmZVsp2fkqWbcvbYa9ORXx8GXSa+nf2CW3kJi3i4V+K7n7xfdlQi9VDx20X9HR3WMU3FzN5KU7TZiu0nMI=
