@@ -1,13 +1,14 @@
-omg: 1
+oms: 1
 lifecycle:
   startup:
-    command: ["python", "/app/app.py"]
+    command: ['python', '/app/app.py']
 info:
   version: 1.0.0
   title: Wolfram
-  description: This is a wolfram service
+  description: Access the Wolfram|Alpha API
 actions:
   answer:
+    help: The Short Answers API returns a single plain text result directly from Wolfram|Alpha.
     http:
       path: /shortanswer
       method: post
@@ -18,6 +19,7 @@ actions:
         type: string
         required: true
         in: requestBody
+        help: For instance, here is a query for "How far is Los Angeles from New York?"
       units:
         type: enum
         enum:
@@ -25,6 +27,9 @@ actions:
           - imperial
         required: false
         in: requestBody
+        help:
+          Use this parameter to manually select what system of units to use for measurements and quantities (either "metric"
+          or "imperial").
     output:
       type: object
       contentType: application/json

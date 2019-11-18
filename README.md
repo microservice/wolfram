@@ -1,33 +1,63 @@
-# _Wolfram_ OMG Microservice
+# _Wolfram_ Open Microservice
 
-[![Open Microservice Guide](https://img.shields.io/badge/OMG%20Enabled-👍-green.svg?)](https://microservice.guide)
+> Access the Wolfram|Alpha API
 
-Wolfram is a unique engine for computing answers and providing knowledge. It works by using its vast store of expert-level knowledge and algorithms to automatically answer questions, do analysis and generate reports.
+[![Open Microservice Specification Version](https://img.shields.io/badge/Open%20Microservice-1.0-477bf3.svg)](https://openmicroservices.org) [![Open Microservices Spectrum Chat](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/open-microservices) [![Open Microservices Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md) [![Open Microservices Commitzen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
-## Direct usage in [Storyscript](https://storyscript.io/):
+## Introduction
 
-##### Answer
-```coffee
-wolfram answer query: "What's eight times ten?"
-wolfram answer query: "What's eight times ten?" units: "imperial"  # units defaults to "metric"
+This project is an example implementation of the [Open Microservice Specification](https://openmicroservices.org), a standard originally created at [Storyscript](https://storyscript.io) for building highly-portable "microservices" that expose the events, actions, and APIs inside containerized software.
+
+## Getting Started
+
+The `oms` command-line interface allows you to interact with Open Microservices. If you're interested in creating an Open Microservice the CLI also helps validate, test, and debug your `oms.yml` implementation!
+
+See the [oms-cli](https://github.com/microservices/oms) project to learn more!
+
+### Installation
+
+```
+npm install -g @microservices/oms
 ```
 
-## Obtaining Wolfram credentials
+## Usage
 
-* [Wolfram AppID](https://products.wolframalpha.com/short-answers-api/documentation/)
+### Open Microservices CLI Usage
 
-Curious to [learn more](https://docs.storyscript.io/)?
+Once you have the [oms-cli](https://github.com/microservices/oms) installed, you can run any of the following commands from within this project's root directory:
 
-✨🍰✨
+#### Actions
 
-## Usage with [OMG CLI](https://www.npmjs.com/package/omg)
+##### answer
 
-##### Answer
-```shell
-$ omg run answer -a query=<QUERY> -a units=<UNITS> -e WOLFRAM_APP_ID=<WOLFRAM_APP_ID>
+> The Short Answers API returns a single plain text result directly from Wolfram|Alpha.
+##### Action Arguments
+
+| Argument Name | Type | Required | Default | Description |
+|:------------- |:---- |:-------- |:--------|:----------- |
+| query | `string` | `true` | None | For instance, here is a query for "How far is Los Angeles from New York?" |
+| units | `enum` | `false` | None | Use this parameter to manually select what system of units to use for measurements and quantities (either "metric" or "imperial"). |
+| WOLFRAM_APP_ID | `string` | `true` | None | Please create an app ID from https://products.wolframalpha.com/short-answers-api/documentation/ |
+
+``` shell
+oms run answer \ 
+    -a query='*****' \ 
+    -a units='*****' \ 
+    -e WOLFRAM_APP_ID=$WOLFRAM_APP_ID
 ```
 
-**Note**: The OMG CLI requires [Docker](https://docs.docker.com/install/) to be installed.
+## Contributing
 
-## License
-[MIT License](https://github.com/omg-services/wolfram/blob/master/LICENSE).
+All suggestions in how to improve the specification and this guide are very welcome. Feel free share your thoughts in the Issue tracker, or even better, fork the repository to implement your own ideas and submit a pull request.
+
+[![Edit wolfram on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/oms-services/wolfram)
+
+This project is guided by [Contributor Covenant](https://github.com/oms-services/.github/blob/master/CODE_OF_CONDUCT.md). Please read out full [Contribution Guidelines](https://github.com/oms-services/.github/blob/master/CONTRIBUTING.md).
+
+## Additional Resources
+
+* [Install the CLI](https://github.com/microservices/oms) - The OMS CLI helps developers create, test, validate, and build microservices.
+* [Example OMS Services](https://github.com/oms-services) - Examples of OMS-compliant services written in a variety of languages.
+* [Example Language Implementations](https://github.com/microservices) - Find tooling & language implementations in Node, Python, Scala, Java, Clojure.
+* [Storyscript Hub](https://hub.storyscript.io) - A public registry of OMS services.
+* [Community Chat](https://spectrum.chat/open-microservices) - Have ideas? Questions? Join us on Spectrum.
